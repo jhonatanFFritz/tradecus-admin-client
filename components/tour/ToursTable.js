@@ -104,8 +104,6 @@ const ToursTable = ({ tours, rowsPerPageOptions, setTours }) => {
     setModalOpenEdit(true);
   };
 
-  
-
   const handleCloseModalEdit = () => {
     setModalOpenEdit(false);
   };
@@ -152,7 +150,7 @@ const ToursTable = ({ tours, rowsPerPageOptions, setTours }) => {
                 </TableCell>
                 <TableCell className="border-slate-700">{tour.city}</TableCell>
                 <TableCell className="border-slate-700">
-                  {tour.address}
+                  {tour.duration}
                 </TableCell>
 
                 <TableCell className=" w-auto border-slate-700">

@@ -54,7 +54,7 @@ const TourDetail = ({ open, handleClose, selectedTour }) => {
                   
                   <div className="flex flex-row items-center justify-between ">
                     <span className="font-bold text-lg text-slate-800">
-                      Distancia:
+                      Duracion:
                     </span>
                     <span className="text-slate-800">
                       {selectedTour.duration}
@@ -64,7 +64,7 @@ const TourDetail = ({ open, handleClose, selectedTour }) => {
                     <span className="font-bold text-lg text-slate-800">
                       Descripción:{" "}
                     </span>
-                    <span className="text-slate-800">{selectedTour.dec}</span>
+                    <span className="text-slate-800">{selectedTour.desc}</span>
                   </div>
                   <div className="flex flex-row items-center justify-between ">
                     <span className="font-bold text-lg text-slate-800">
