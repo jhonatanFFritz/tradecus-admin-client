@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Fade, Button } from "@mui/material";
+import { Modal, Fade, Checkbox } from "@mui/material";
 const TourDetail = ({ open, handleClose, selectedTour }) => {
   console.log(selectedTour);
   return (
@@ -51,7 +51,7 @@ const TourDetail = ({ open, handleClose, selectedTour }) => {
                     </span>
                     <span className="text-slate-800">{selectedTour.city}</span>
                   </div>
-                  
+
                   <div className="flex flex-row items-center justify-between ">
                     <span className="font-bold text-lg text-slate-800">
                       Duracion:
@@ -60,17 +60,29 @@ const TourDetail = ({ open, handleClose, selectedTour }) => {
                       {selectedTour.duration}
                     </span>
                   </div>
+
+                  <div className="flex flex-row items-center justify-between ">
+                    <span className="font-bold text-lg text-slate-800">
+                      Número de personas:{" "}
+                    </span>
+                    <span className="text-slate-800">
+                      {selectedTour.maxGroupSize}
+                    </span>
+                  </div>
+                  <div className="flex flex-row items-center justify-between ">
+                    <span className="font-bold text-lg text-slate-800">
+                      ¿Tour destacado?:
+                    </span>
+                    
+                    <span className="text-slate-800">
+                      {selectedTour.featured ? "Sí" : "No"}
+                    </span>
+                  </div>
                   <div className="flex flex-row items-center justify-between ">
                     <span className="font-bold text-lg text-slate-800">
                       Descripción:{" "}
                     </span>
                     <span className="text-slate-800">{selectedTour.desc}</span>
-                  </div>
-                  <div className="flex flex-row items-center justify-between ">
-                    <span className="font-bold text-lg text-slate-800">
-                      Número de personas:{" "}
-                    </span>
-                    <span className="text-slate-800">{selectedTour.maxGroupSize}</span>
                   </div>
                 </>
               )}
@@ -93,7 +105,7 @@ const TourDetail = ({ open, handleClose, selectedTour }) => {
                 ) : (
                   <div className="flex items-center justify-center h-32">
                     <span className="text-gray-500">
-                      Obteniendo las imágenes
+                      No hay Imagenes para mostrar
                     </span>
                   </div>
                 )}

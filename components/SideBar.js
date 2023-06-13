@@ -21,7 +21,7 @@ const SideBar = forwardRef(({ showNav }, ref) => {
         <picture>
           <img
             className="w-48 h-auto"
-            src="https://res.cloudinary.com/du9dasmxo/image/upload/v1686452824/tradecus/Imagen_de_WhatsApp_2023-06-10_a_las_21.59.54_dgsv1x.jpg"
+            src="https://res.cloudinary.com/du9dasmxo/image/upload/v1686453396/tradecus/Imagen_de_WhatsApp_2023-06-10_a_las_21.59.54-removebg-preview_yjzpve.png"
             alt="Logo de la compañia"
           />
         </picture>

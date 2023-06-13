@@ -6,19 +6,26 @@ function NewTourForm() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
   const [duration, setDistance] = useState("");
   const [desc, setDescription] = useState("");
   const [maxGroupSize, setMaxGroupSize] = useState("");
   const [images, setPhotos] = useState([]);
-  const [isFeatured, setIsFeatured] = useState(false);
+  const [featured, setIsFeatured] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Validación de campos obligatorios
-    if (!title || !price || !city || !address || !duration || !desc || !maxGroupSize || !images) {
+    if (
+      !title ||
+      !price ||
+      !city ||
+      !duration ||
+      !desc ||
+      !maxGroupSize ||
+      !images
+    ) {
       setErrorMessage("Todos los campos son obligatorios");
       return;
     }
@@ -28,11 +35,11 @@ function NewTourForm() {
     formData.append("title", title);
     formData.append("price", price);
     formData.append("city", city);
-    formData.append("address", address);
     formData.append("duration", duration);
     formData.append("desc", desc);
     formData.append("maxGroupSize", maxGroupSize);
-    formData.append("isFeatured", isFeatured.toString());
+    formData.append("featured", featured); // No es necesario convertir a cadena de texto
+
 
     images.forEach((image, index) => {
       formData.append(`images`, image);
@@ -51,13 +58,12 @@ function NewTourForm() {
         console.log(response.data);
 
         setTitle("");
-        setPrice("");
+        setPrice(0);
         setCity("");
-        setAddress("");
         setDistance("");
         setDescription("");
         setPhotos([]);
-        setIsFeatured(false); // Reiniciar el estado isFeatured
+        setIsFeatured(false); // Reiniciar el estado featured
         setErrorMessage("");
       })
       .catch((error) => {
@@ -83,7 +89,7 @@ function NewTourForm() {
         <h2>Crear nuevo Tour</h2>
         <form
           onSubmit={handleSubmit}
-          className="w-full mt-5 grid grid-cols-2 gap-10"
+          className="w-full mt-5 grid grid-cols-2 gap-5"
           encType="multipart/form-data"
         >
           <TextField
@@ -105,13 +111,6 @@ function NewTourForm() {
             type="text"
             value={city}
             onChange={(e) => setCity(e.target.value)}
-          />
-
-          <TextField
-            label="Dirección"
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
           />
 
           <TextField
@@ -137,13 +136,13 @@ function NewTourForm() {
           />
 
           <FormControlLabel
+            label="Destacado"
             control={
               <Checkbox
-                checked={isFeatured}
+                checked={featured}
                 onChange={(e) => setIsFeatured(e.target.checked)}
               />
             }
-            label="Destacado"
           />
 
           <input
@@ -154,9 +153,13 @@ function NewTourForm() {
           />
 
           {errorMessage && <p>{errorMessage}</p>}
-          <Button variant="contained" type="submit" className="w-52">
+          <button
+            variant="contained"
+            type="submit"
+            className="w-80 bg-green-500 hover:bg-green-700 rounded text-slate-100 font-bold py-2 px-4"
+          >
             Crear Tour
-          </Button>
+          </button>
         </form>
       </div>
     </div>

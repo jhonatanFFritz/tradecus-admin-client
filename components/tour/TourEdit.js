@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Fade, Button, TextField } from "@mui/material";
+import { Modal, Fade, TextField, FormControlLabel, Checkbox } from "@mui/material";
 import axios from "axios";
 
 function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
@@ -9,6 +9,7 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
   const [duration, setDuration] = useState("");
   const [desc, setDescription] = useState("");
   const [maxGroupSize, setMaxGroupSize] = useState("");
+  const [featured, setIsFeatured] = useState(false);
   const [images, setPhotos] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -20,6 +21,7 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
       setDuration(selectedTourEdit.duration);
       setDescription(selectedTourEdit.desc);
       setMaxGroupSize(selectedTourEdit.maxGroupSize);
+      setIsFeatured(selectedTourEdit.featured);
     }
   }, [selectedTourEdit]);
 
@@ -45,6 +47,7 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
     formData.append("duration", duration);
     formData.append("desc", desc);
     formData.append("maxGroupSize", maxGroupSize);
+    formData.append("featured", featured);
     images.forEach((image, index) => {
       formData.append(`images`, image);
     });
@@ -64,10 +67,12 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
         setDuration("");
         setDescription("");
         setMaxGroupSize("");
+        setIsFeatured(false);
         setPhotos([]);
         setErrorMessage("");
 
         updateTour(response.data);
+        handleClose();
       })
       .catch((error) => {
         console.error(error);
@@ -97,6 +102,9 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
       >
         <div className="w-full p-5">
           <span className="text-2xl font-bold text-slate-700">Editar Tour</span>
+          <p className="text-slate-400">
+            Haga click fuera del formulario para cerrarlo
+          </p>
           <form
             onSubmit={handleSubmit}
             className="w-full mt-5 grid grid-cols-2 gap-10"
@@ -144,7 +152,16 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
               value={desc}
               onChange={(e) => setDescription(e.target.value)}
             />
-
+            <FormControlLabel
+              label="¿Destacar tour?"
+              control={
+                <Checkbox
+                  checked={featured}
+                  onChange={(e) => setIsFeatured(e.target.checked)}
+                  color="primary"
+                />
+              }
+            />
             <input
               type="file"
               name="images"
@@ -153,9 +170,13 @@ function TourEdit({ open, handleClose, selectedTourEdit, updateTour }) {
             />
 
             {errorMessage && <p>{errorMessage}</p>}
-            <Button variant="contained" type="submit" className="w-52">
+            <button
+              variant="contained"
+              type="submit"
+              className="w-60 bg-blue-500 hover:bg-blue-700 rounded text-slate-100 font-bold py-2 px-4"
+            >
               Actualizar
-            </Button>
+            </button>
           </form>
         </div>
       </Fade>
